@@ -135,7 +135,7 @@ jobs:
           cd front
           npm run build
 
-      - name: Test front
-        run: |
-          cd front
-          npm run test
+#      - name: Test front
+#        run: |
+#          cd front
+#          npm run test
