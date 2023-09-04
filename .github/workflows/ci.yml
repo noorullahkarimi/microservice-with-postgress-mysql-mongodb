@@ -1,5 +1,5 @@
 name: CI
-
+# we use the master branch. it is standard name for
 on:
   push:
     branches:
@@ -7,26 +7,32 @@ on:
   pull_request:
     branches:
       - master
-
+# works should do for service1, we tell it should run on the ubuntu-latest version
 jobs:
   service1:
     name: Historical-Service
     runs-on: ubuntu-latest
-
+    
+    # we should have the code for future steps, so we clone current repository.
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
+        
+      # we need to set up jdk v17 because in our service1 we used the v17 java
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
           java-version: 17
           distribution: adopt
-
+          
+        # this folder with name Historical-Service/mvnw not have permission and should we give it
+        # because we use the ubuntu-latest for it
+      - name: Grant execute permissions to Maven wrapper
+        run: chmod +x Historical-Service/mvnw
+        
+        # then we goes to folder and we build the project 
       - name: Build and Test Historical-Service
-        run: |
-          cd Historical-Service
-          ./mvnw clean install
+        run: cd Historical-Service && ./mvnw clean install
 
   service2:
     name: HotelService
@@ -41,11 +47,12 @@ jobs:
         with:
           java-version: 17
           distribution: adopt
+          
+      - name: Grant execute permissions to Maven wrapper
+        run: chmod +x Historical-Service/mvnw
 
       - name: Build and Test HotelService
-        run: |
-          cd HotelService
-          ./mvnw clean install
+        run: cd Historical-Service && ./mvnw clean install
 
   service3:
     name: TourService
@@ -60,11 +67,12 @@ jobs:
         with:
           java-version: 17
           distribution: adopt
+          
+      - name: Grant execute permissions to Maven wrapper
+        run: chmod +x Historical-Service/mvnw
 
       - name: Build and Test TourService
-        run: |
-          cd TourService
-          ./mvnw clean install
+        run: cd Historical-Service && ./mvnw clean install
   eureka:
     name: eureka
     runs-on: ubuntu-latest
@@ -78,11 +86,12 @@ jobs:
         with:
           java-version: 17
           distribution: adopt
+          
+      - name: Grant execute permissions to Maven wrapper
+        run: chmod +x Historical-Service/mvnw
 
       - name: Build and eureka
-        run: |
-          cd eureka
-          ./mvnw clean install
+        run: cd Historical-Service && ./mvnw clean install
 
   apigateway:
     name: apigateway
@@ -97,11 +106,12 @@ jobs:
         with:
           java-version: 17
           distribution: adopt
+          
+      - name: Grant execute permissions to Maven wrapper
+        run: chmod +x Historical-Service/mvnw
 
       - name: Build and Test apigateway
-        run: |
-          cd apigateway
-          ./mvnw clean install
+        run: cd Historical-Service && ./mvnw clean install
   nuxt:
     name: front
     runs-on: ubuntu-latest
