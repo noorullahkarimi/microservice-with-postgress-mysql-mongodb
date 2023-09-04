@@ -1,0 +1,126 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  service1:
+    name: Historical-Service
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+
+      - name: Build and Test Historical-Service
+        run: |
+          cd Historical-Service
+          ./mvnw clean install
+
+  service2:
+    name: HotelService
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+
+      - name: Build and Test HotelService
+        run: |
+          cd HotelService
+          ./mvnw clean install
+
+  service3:
+    name: TourService
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+
+      - name: Build and Test TourService
+        run: |
+          cd TourService
+          ./mvnw clean install
+  eureka:
+    name: eureka
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+
+      - name: Build and eureka
+        run: |
+          cd eureka
+          ./mvnw clean install
+
+  apigateway:
+    name: apigateway
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+
+      - name: Build and Test apigateway
+        run: |
+          cd apigateway
+          ./mvnw clean install
+  nuxt:
+    name: front
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Install Dependencies
+        run: |
+          cd front
+          npm install
+
+      - name: Build front
+        run: |
+          cd front
+          npm run build
+
+      - name: Test front
+        run: |
+          cd front
+          npm run test
