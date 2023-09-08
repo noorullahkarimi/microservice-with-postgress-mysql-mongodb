@@ -49,10 +49,10 @@ jobs:
           distribution: adopt
           
       - name: Grant execute permissions to Maven wrapper
-        run: chmod +x Historical-Service/mvnw
+        run: chmod +x HotelService/mvnw
 
       - name: Build and Test HotelService
-        run: cd Historical-Service && ./mvnw clean install
+        run: cd HotelService && ./mvnw clean install
 
   service3:
     name: TourService
@@ -69,10 +69,10 @@ jobs:
           distribution: adopt
           
       - name: Grant execute permissions to Maven wrapper
-        run: chmod +x Historical-Service/mvnw
+        run: chmod +x TourService/mvnw
 
       - name: Build and Test TourService
-        run: cd Historical-Service && ./mvnw clean install
+        run: cd TourService && ./mvnw clean install
   eureka:
     name: eureka
     runs-on: ubuntu-latest
@@ -88,10 +88,10 @@ jobs:
           distribution: adopt
           
       - name: Grant execute permissions to Maven wrapper
-        run: chmod +x Historical-Service/mvnw
+        run: chmod +x eureka/mvnw
 
       - name: Build and eureka
-        run: cd Historical-Service && ./mvnw clean install
+        run: cd eureka && ./mvnw clean install
 
   apigateway:
     name: apigateway
@@ -108,10 +108,10 @@ jobs:
           distribution: adopt
           
       - name: Grant execute permissions to Maven wrapper
-        run: chmod +x Historical-Service/mvnw
+        run: chmod +x apigateway/mvnw
 
       - name: Build and Test apigateway
-        run: cd Historical-Service && ./mvnw clean install
+        run: cd apigateway && ./mvnw clean install
   nuxt:
     name: front
     runs-on: ubuntu-latest
