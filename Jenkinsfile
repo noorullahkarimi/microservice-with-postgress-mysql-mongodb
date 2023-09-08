@@ -8,8 +8,7 @@ pipeline{
                 bat 'cd TourService && mvnw clean install'
                 bat 'cd eureka && mvnw clean install'
                 bat 'cd apigateway && mvnw clean install'
-                bat 'cd front'
-                bat 'npm install'
+                bat 'cd front && npm install'
             }
         }
         // stage('Test'){
